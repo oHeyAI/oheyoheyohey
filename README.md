@@ -1,4 +1,4 @@
-# o token contract
+# O token contract
 
 # How to Build
    - cd to 'build' directory
