@@ -15,11 +15,11 @@ namespace eosiosystem {
    class system_contract;
 }
 using namespace eosio;
-namespace chex{
+namespace o{
 
    using std::string;
 
-   class [[eosio::contract("chexchexchex")]] token : public contract {
+   class [[eosio::contract("oheyoheyohey")]] token : public contract {
       public:
          using contract::contract;
 
@@ -87,7 +87,7 @@ namespace chex{
              accounts table(get_self(), account.value);
              auto addentry = [&](auto & entry)
              {
-               entry.balance = eosio::asset(0, eosio::symbol("CHEX",8));
+               entry.balance = eosio::asset(0, eosio::symbol("O",8));
              };
              if(table.begin() == table.end())
              {
