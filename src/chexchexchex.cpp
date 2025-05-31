@@ -3,12 +3,12 @@
  *  @copyright defined in eos/LICENSE.txt
  */
 
-#include "chexchexchex.hpp"
+#include "oheyoheyohey.hpp"
 #include <eosio/transaction.hpp>
 #include <chrono>
 
 using namespace eosio;
-namespace chex{
+namespace o{
 
 void check_symbol(eosio::symbol const & sym)
 {
@@ -278,7 +278,7 @@ void token::convert_locked_to_balance( name owner )
 void token::sub_balance( name owner, asset value ) {
    accounts from_acnts( _self, owner.value );
 
-   const auto& from = from_acnts.get( value.symbol.code().raw(), "No balance object found, you do not own any CHEX" );
+   const auto& from = from_acnts.get( value.symbol.code().raw(), "No balance object found, you do not own any O" );
    check( from.balance.amount >= value.amount, "Overdrawn balance, only " + from.balance.to_string() + " is available" );
    check( from.balance - from.locked >= value, "You are attempting to transfer " + value.to_string() + ", but you can only transfer " + (from.balance - from.locked).to_string() + ", because " + from.locked.to_string() + " are in the locked state. You can unlock them using the \"unlock\" action. You must then wait for the tokens to finish unlocking before attempting this action again." );
 
