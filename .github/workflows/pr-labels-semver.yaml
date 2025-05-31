@@ -19,3 +19,4 @@ jobs:
           count: 1
           labels: "patch, minor, major"
           add_comment: true
+
