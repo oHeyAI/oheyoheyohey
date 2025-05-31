@@ -1,26 +1,26 @@
 #!/bin/bash
 
 setup_chex_contract(){
-  local chexchexchex=$(generate_random_name)
-  result=$( (cleos system newaccount eosio $chexchexchex $public_key --stake-net "100000.00000000 CHEX" --stake-cpu "100000.00000000 CHEX" --buy-ram-kbytes 10000) 2>&1)
+  local oheyoheyohey=$(generate_random_name)
+  result=$( (cleos system newaccount eosio $oheyoheyohey $public_key --stake-net "100000.00000000 O" --stake-cpu "100000.00000000 CHEX" --buy-ram-kbytes 10000) 2>&1)
   if [[ $? -ne 0 ]]
   then
-    echo "Failed to create account $chexchexchex: $result"
+    echo "Failed to create account $oheyoheyohey: $result"
     return 1
   fi
-  result=$( (cleos set contract $chexchexchex $CHEXCHEXCHEX_DIR/builds/test/chexchexchex chexchexchex.wasm chexchexchex.abi) 2>&1)
+  result=$( (cleos set contract $oheyoheyohey $OHEYOHEYOHEY_DIR/builds/test/oheyoheyohey oheyoheyohey.wasm oheyoheyohey.abi) 2>&1)
   if [[ $? -ne 0 ]]
   then
-    echo "Failed to set chexchexchex contract"
+    echo "Failed to set oheyoheyohey contract"
     return 1
   fi
-  result=$( (cleos set account permission $chexchexchex active --add-code) 2>&1)
+  result=$( (cleos set account permission $oheyoheyohey active --add-code) 2>&1)
   if [[ $? -ne 0 ]]
   then
-    echo "Failed to set up eosio.code permission for chex contract"
+    echo "Failed to set up eosio.code permission for o contract"
     return 1
   fi
-  echo $chexchexchex
+  echo $oheyoheyohey
 }
 
 function helper_send_token()
