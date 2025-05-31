@@ -1,4 +1,4 @@
-# chexchexchex contract
+# o token contract
 
 # How to Build
    - cd to 'build' directory
@@ -6,8 +6,8 @@
    - run the command 'make'
 
 # After build -
-   - The built smart contract is under the 'chexchexchex' directory in the 'build' directory
-   - You can then do a 'set contract' action with 'cleos' and point in to the './build/chexchexchex' directory
+   - The built smart contract is under the 'oheyoheyohey' directory in the 'build' directory
+   - You can then do a 'set contract' action with 'cleos' and point in to the './build/oheyoheyohey' directory
    - Additions to CMake should be done to the CMakeLists.txt in the './src' directory and not in the top level CMakeLists.txt
 
 # How to use
@@ -19,7 +19,7 @@
 
 <h3>Intent</h3>
 
-The intent of `create` is to create a new token with a `maximum_supply} as indicated. The format of the asset must include the correct number of decimal places, and the token symbol. For example, 1000000000.00000000 CHEX will create a supply of 1 billion CHEX tokens, with 8 decimal places of precision.
+The intent of `create` is to create a new token with a `maximum_supply} as indicated. The format of the asset must include the correct number of decimal places, and the token symbol. For example, 1000000000.00000000 O will create a supply of 1 billion O tokens, with 8 decimal places of precision.
 <h2 class="contract"> issue </h2>
 <h3>Parameters</h3>
 
