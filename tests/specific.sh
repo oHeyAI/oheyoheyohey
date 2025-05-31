@@ -1,8 +1,8 @@
 #!/bin/bash
 
-setup_chex_contract(){
+setup_o_contract(){
   local oheyoheyohey=$(generate_random_name)
-  result=$( (cleos system newaccount eosio $oheyoheyohey $public_key --stake-net "100000.00000000 O" --stake-cpu "100000.00000000 CHEX" --buy-ram-kbytes 10000) 2>&1)
+  result=$( (cleos system newaccount eosio $oheyoheyohey $public_key --stake-net "100000.00000000 O" --stake-cpu "100000.00000000 O" --buy-ram-kbytes 10000) 2>&1)
   if [[ $? -ne 0 ]]
   then
     echo "Failed to create account $oheyoheyohey: $result"
