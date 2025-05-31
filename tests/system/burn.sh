@@ -4,7 +4,7 @@ function burn_tests()
 {
   local quantity=100.00000000
   local max_supply_quantity=1000000000.00000000
-  local symbol=CHEX
+  local symbol=O
   local precision=8
   burn_success 
   burn_wrong_authority 
@@ -16,13 +16,13 @@ function burn_tests()
 
 function burn_no_locked_balance()
 {
-  local chex_contract=$(setup_chex_contract)
+  local o_contract=$(setup_o_contract)
   if [[ $? -ne 0 ]]
   then
-    test_fail "${FUNCNAME[0]}: Failed to set chex contract: $chex_contract"
+    test_fail "${FUNCNAME[0]}: Failed to set o contract: $o_contract"
     return 1
   fi
-  local result=$( (cleos push action $chex_contract create "[\"$chex_contract\" \"$max_supply_quantity $symbol\"]" -p $chex_contract) 2>&1)
+  local result=$( (cleos push action $o_contract create "[\"$o_contract\" \"$max_supply_quantity $symbol\"]" -p $o_contract) 2>&1)
   if [[ $? -ne 0 ]]
   then
     test_fail "Failed to create $symbol token: $result"
@@ -41,7 +41,7 @@ function burn_no_locked_balance()
     return 1
   fi
 
-  local stats_table=$(cleos get table $chex_contract $symbol stat)
+  local stats_table=$(cleos get table $o_contract $symbol stat)
   local supply=$(echo $stats_table | jq -r .rows[0].supply)
   local max_supply=$(echo $stats_table | jq -r .rows[0].max_supply)
   local issuer=$(echo $stats_table | jq -r .rows[0].issuer)
@@ -58,27 +58,27 @@ function burn_no_locked_balance()
     return 1
   fi
 
-  if [[ $issuer != $chex_contract ]]
+  if [[ $issuer != $o_contract ]]
   then
-    test_fail "${FUNCNAME[0]}: Expected issuer to be \"$chex_contract\" but observed \"$issuer\""
+    test_fail "${FUNCNAME[0]}: Expected issuer to be \"$o_contract\" but observed \"$issuer\""
     return 1
   fi
 
-  local account1_balance_before_burn=$(cleos get table $chex_contract $account1 accounts | jq -r .rows[0].balance)
+  local account1_balance_before_burn=$(cleos get table $o_contract $account1 accounts | jq -r .rows[0].balance)
   if [[ $account1_balance_before_burn != "$quantity $symbol" ]]
   then
     test_fail "${FUNCNAME[0]}: The balance of account1 is incorrect, expected \"$quantity $symbol\" but observed \"$account1_balance_before_burn\""
     return 1
   fi
 
-  result=$( (cleos push action -f $chex_contract burn "[$account1 \"$quantity $symbol\"]" -p $account1) 2>&1)
+  result=$( (cleos push action -f $o_contract burn "[$account1 \"$quantity $symbol\"]" -p $account1) 2>&1)
   if [[ $? -ne 0 ]]
   then
     test_fail "The burn failed although it should have succeeded: $result"
     return 1
   fi
 
-  local account1_balance_after_burn=$(cleos get table $chex_contract $account1 accounts | jq -r .rows[0].balance)
+  local account1_balance_after_burn=$(cleos get table $o_contract $account1 accounts | jq -r .rows[0].balance)
   if [[ $account1_balance_after_burn != "0.00000000 $symbol" ]]
   then
     test_fail "${FUNCNAME[0]}: The balance of account1 is incorrect, expected \"0.00000000 $symbol\" but observed \"$account1_balance_after_burn\""
@@ -116,13 +116,13 @@ function burn_no_locked_balance()
 
 function burn_partially_locked_balance()
 {
-  local chex_contract=$(setup_chex_contract)
+  local chex_contract=$(setup_o_contract)
   if [[ $? -ne 0 ]]
   then
-    test_fail "${FUNCNAME[0]}: Failed to set chex contract: $chex_contract"
+    test_fail "${FUNCNAME[0]}: Failed to set chex contract: $o_contract"
     return 1
   fi
-  local result=$( (cleos push action $chex_contract create "[\"$chex_contract\" \"$max_supply_quantity $symbol\"]" -p $chex_contract) 2>&1)
+  local result=$( (cleos push action $chex_contract create "[\"$o_contract\" \"$max_supply_quantity $symbol\"]" -p $o_contract) 2>&1)
   if [[ $? -ne 0 ]]
   then
     test_fail "Failed to create $symbol token: $result"
