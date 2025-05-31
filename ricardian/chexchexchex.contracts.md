@@ -4,7 +4,7 @@
 * __maximum_supply__
 
 **Intent**
-The intent of {{create}} is to create a new token with a {{maximum_supply} as indicated. The format of the asset must include the correct number of decimal places, and the token symbol. For example, 1000000000.00000000 CHEX will create a supply of 1 billion CHEX tokens, with 8 decimal places of precision.
+The intent of {{create}} is to create a new token with a {{maximum_supply} as indicated. The format of the asset must include the correct number of decimal places, and the token symbol. For example, 1000000000.00000000 O will create a supply of 1 billion O tokens, with 8 decimal places of precision.
 <h1 class="contract"> issue </h1>
 **Parameters**
 * __to__ 
