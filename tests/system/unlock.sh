@@ -3,7 +3,7 @@
 function unlock_tests()
 {
   local quantity=100.00000000
-  local symbol=CHEX
+  local symbol=O
   local precision=8
   unlock_success 
   unlock_wrong_authority 
@@ -17,13 +17,13 @@ function unlock_tests()
 
 function unlock_partially_locked_balance()
 {
-  local chex_contract=$(setup_chex_contract)
+  local o_contract=$(setup_o_contract)
   if [[ $? -ne 0 ]]
   then
-    test_fail "${FUNCNAME[0]}: Failed to set chex contract: $chex_contract"
+    test_fail "${FUNCNAME[0]}: Failed to set o contract: $o_contract"
     return 1
   fi
-  local result=$( (cleos push action $chex_contract create "[\"$chex_contract\" \"1000000000.00000000 $symbol\"]" -p $chex_contract) 2>&1)
+  local result=$( (cleos push action $o_contract create "[\"$o_contract\" \"1000000000.00000000 $symbol\"]" -p $o_contract) 2>&1)
   if [[ $? -ne 0 ]]
   then
     test_fail "${FUNCNAME[0]}: Failed to create $symbol token: $result"
@@ -35,7 +35,7 @@ function unlock_partially_locked_balance()
     test_fail "${FUNCNAME[0]}: Failed to create account1: $account1"
     return 1
   fi
-  result=$( (helper_send_token $account1 $quantity $symbol $chex_contract $chex_contract) 2>&1)
+  result=$( (helper_send_token $account1 $quantity $symbol $o_contract $chex_contract) 2>&1)
   if [[ $? -ne 0 ]]
   then
     test_fail "${FUNCNAME[0]}: Failed to generate tokens for test: $result"
@@ -45,7 +45,7 @@ function unlock_partially_locked_balance()
   local locked_quantity=$(echo "scale=8; $quantity / 2.0" | bc)
   local unlocked_quantity=$(echo "scale=8; ($quantity - $locked_quantity)/1.0" | bc)
 
-  result=$( (cleos push action -f $chex_contract lock "[$account1 \"$locked_quantity $symbol\" 1]" -p $account1) 2>&1)
+  result=$( (cleos push action -f $o_contract lock "[$account1 \"$locked_quantity $symbol\" 1]" -p $account1) 2>&1)
   if [[ $? -ne 0 ]]
   then
     test_fail "${FUNCNAME[0]}: Failed to lock tokens: $result"
